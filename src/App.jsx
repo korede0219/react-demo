@@ -1,74 +1,40 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-
-import React from 'react'
-
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import PlayersList from "./PlayersList";
 
 const App = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleTheme = () => setDarkMode(!darkMode);
+
+  const appStyle = {
+    backgroundColor: darkMode ? "#1a1a1a" : "#f0f0f0",
+    color: darkMode ? "#f0f0f0" : "#1a1a1a",
+    minHeight: "100vh",
+    transition: "all 0.3s ease"
+  };
+
+  document.documentElement.style.setProperty("--card-bg", darkMode ? "#2c2c2c" : "#ffffff");
+  document.documentElement.style.setProperty("--text-color", darkMode ? "#f0f0f0" : "#000000");
+
   return (
-    <>
-              <Navbar expand="lg" className="bg-body-tertiary">
-      <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <div style={appStyle}>
+      <div style={{ textAlign: "center", padding: "1rem" }}>
+        <h1 style={{ fontFamily: "Arial", fontWeight: "bold" }}>Legends Gallery</h1>
+        <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", marginTop: "1rem" }}>
+          <span style={{ fontSize: "1rem" }}>Light</span>
+          <input
+            type="checkbox"
+            checked={darkMode}
+            onChange={toggleTheme}
+            style={{ width: "40px", height: "20px" }}
+          />
+          <span style={{ fontSize: "1rem" }}>Dark</span>
+        </label>
+      </div>
+      <PlayersList />
+    </div>
+  );
+};
 
-   
-    <div>
-        <h1>Welcome to Bootstrap</h1>
-        </div>   
-        <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/94/5136773/1.jpg?2578" />
-      <Card.Body>
-        <Card.Title>Realm Phone</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Buy now</Button>
-      </Card.Body>
-    </Card>
-
-
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="some.png" />
-      <Card.Body>
-        <Card.Title>some Phone</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Buy now </Button>
-      </Card.Body>
-    </Card>
-
-        </>
-      
-        
-  )
-}
-
-
-export default App
+export default App;
